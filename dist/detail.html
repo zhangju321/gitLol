@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>详情页</title>
+    <style>
+        ul{
+            width: 400px;
+            height: 400px;
+            /* background: green; */
+            margin: 50px auto;
+        }
+        ul,li{
+            list-style: none;
+           
+        }
+        li p{
+            width: 218px;
+        }
+        
+         li .btn{
+            border: none;
+            width: 220px;
+            height: 40px;
+            background-color: red;
+            color: white;
+            cursor: pointer;
+            text-align: center;
+        }
+        .minus{
+            cursor:pointer;
+            background: greenyellow;
+            width: 24px;
+        }
+        .plus{  
+            cursor: pointer;
+            background: greenyellow;
+            width: 24px;
+        }
+        .txt{
+            
+            width: 160px;
+            /* text-align: center; */
+        }
+        .title{
+            text-align: center;
+            font-size: 30px;
+            color: green;
+            margin: 0;
+            border-right: 1px solid red;
+            border-left: 1px solid red;
+        }
+        .price{
+            text-align: center;
+            border: 1px solid red;  
+            margin: 0;
+        }
+        .jiajian{
+            width: 218px;
+            text-align: center;
+            border-right: 1px solid red;
+            border-left: 1px solid red;
+            margin: 0;
+            display: flex;
+            justify-content: space-between;
+        }
+       li img{
+           display: block;
+           margin: 0;
+       }
+    </style>
+</head>
+<body>
+    <ul id="detail">
+      
+    </ul>
+</body>
+<script src="cart.js"></script>
+<script>
+    let aaa = location.search;
+    var bbb = aaa.split("?id=");
+    var oDetail = document.getElementById("detail");       
+    $.get("http://jx.xuzhixiang.top/ap/api/productlist.php", {
+                uid: 16911
+            }, data => {      
+                var shu = data.data;
+                var str = "";           
+               for(var i in shu){
+                if(bbb[1] == shu[i].pid){
+       str+=`  <li>
+            <img src="${shu[i].pimg}" alt="">
+            <p class ="title">${shu[i].pname}</p>
+            <p class="price">${shu[i].pprice}</p>
+            <p class="jiajian"><span class="minus"> - </span>
+            <input type ="text" class= "txt" value="1">
+               <span class="plus"> + </span>
+            </p>  
+            <input type="button" class="btn" data-id = "${shu[i].pid}" value="加入购物车"/>
+         </li>`;
+        }
+               }
+               oDetail.innerHTML = str;
+            });
+  
+    let oMinus = document.querySelectorAll(".minus")[0];
+    let oPlus = document.querySelectorAll(".plus")[0];
+    let oTxt = document.querySelectorAll(".txt")[0];
+    let oBtn = document.querySelectorAll(".btn")[0];
+
+    oMinus.onclick = function(){
+        if(oTxt.value <= 1){
+            oTxt.value = 1;
+            return;
+        }
+        oTxt.value--;
+    }
+    oPlus.onclick = function(){
+        oTxt.value++;
+    }
+    
+</script>
+</html>

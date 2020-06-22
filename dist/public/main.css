@@ -1,0 +1,169 @@
+html, body {
+    position: relative; 
+  }
+  body {
+    background: #eee;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color:#000;
+    margin: 0;
+    padding: 0;
+  }
+  .swiper-container {
+    margin-top: 120px;
+    width: 100%;
+    height: 100%;
+  }
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+  }
+  #middle{
+    height: 330px;
+    display: flex;
+    justify-content: space-around;
+  }
+  #middle .middle-top{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  #middle .middle-top img{
+    display: block;
+    height: 230px;
+    width: 350px;
+  }
+  #middle .middle-top span{
+    font-weight: bold;
+  }
+  /* proList中部样式 */
+  .img_PL{
+    width: 1519.2px;
+    height: 180px;
+    position: absolute;
+    top:120px;
+    overflow: hidden;
+  }
+  .img_PL img{
+    display: block;
+    width: 100%;
+    height: 100%;
+  
+  }
+  body,html{
+    width: 100%;
+  }
+  #plMiddle{
+    position: absolute;
+    height: 100%;
+    top: 300px;
+    width: 100%;
+  }
+  #plMiddle .plMiddle-left{
+    width: 200px;
+    height: 700px;
+    float: left;
+  }
+  #plMiddle .plMiddle-left h4{
+   font-weight: bold;
+   font-size: 30px;
+   border-left: 2px solid gray;
+   margin: 20px 20px 20px 20px;
+   padding-left: 10px;
+  }
+  #plMiddle .plMiddle-left ul li{
+    margin: 5px 0px 5px 50px;
+    cursor: pointer;
+  }
+  #plMiddle .plMiddle-left ul li a{
+    display: block;
+    width: 80px;
+    height: 20px;
+    font-size: 14px;
+    color: black;   
+  } 
+  #plMiddle .plMiddle-left .list_list li{
+    cursor: pointer;
+  }
+  #plMiddle .plMiddle-right {
+    overflow: hidden;
+    min-height: 700px;
+    background: red;
+  }
+ .bottom{
+   position: absolute;
+   top: 1000px;
+   margin-left: 127px;
+ }
+ /*购物车，列表页 数据 */
+ .plMiddle-right #proLi li p{
+  width: 218px;
+}       
+#proLi{
+  display: flex;
+  justify-content: space-around;
+ }
+#proLi li .btn{
+  border: none;
+  width: 220px;
+  height: 40px;
+  background-color: red;
+  color: white;
+  cursor: pointer;
+  text-align: center;
+}
+.minus{
+  cursor:pointer;
+  background: greenyellow;
+  width: 24px;
+}
+.plus{  
+  cursor: pointer;
+  background: greenyellow;
+  width: 24px;
+}
+.txt{            
+  width: 160px;
+}
+.title{
+  text-align: center;
+  font-size: 30px;
+  color: green;
+  margin: 0;
+  border-right: 1px solid red;
+  border-left: 1px solid red;
+}
+.price{
+  text-align: center;
+  border: 1px solid red;  
+  margin: 0;
+}
+.jiajian{
+  width: 218px;
+  text-align: center;
+  border-right: 1px solid red;
+  border-left: 1px solid red;
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+}
+#proLi li img{
+ display: block;
+ margin: 0;
+}

@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="./public/public.css">
     <link rel="stylesheet" href="./public/reset.css">
     <link rel="stylesheet" href="./public/main.css">
+    <link rel="stylesheet" href="./login.html">
     <link rel="stylesheet" href="./package/css/swiper.min.css">
     <script src="./package/js/swiper.min.js"></script>
     <script src="./js/jquery-1.11.0.js"></script>
@@ -26,7 +27,7 @@
                <ul class="header-list">
                    <li>
                     <img src="" alt="">   
-                    <a href="#">你好,请登录</a>
+                    <a href="login.html">你好,请登录</a>
                 </li>
                 <li>
                     <img src="./img/1.png" alt="">   
@@ -219,15 +220,18 @@
   </script>
   <!-- 二级菜单 -->
   <script>
-  $(function(){
-    $(".list_1 a").mouseover(function(){
+   $(function(){
+    $(".list_1 a").hover(function(){
         $(this).css("color","orange").css("border-bottom","2px solid orange");
-        $(this).siblings().css({background:"black",heigth:"200px",width:"150px"}).fadeIn();
+        $(this).next().css({background:"black",heigth:"200px",width:"150px"}).fadeToggle();
+    },function(){
+        $(this).css("color","white").css("border","none");  
+        $(this).next().css("color","white").css("border","none").fadeToggle();     
     });
-    $(".list_1 a").mouseout(function(){
-        $(this).css("color","white").css("border-bottom","0px");
-        $(this).siblings().css({background:"black",heigth:"200px",width:"150px"}).fadeOut();
-    })
+    $(".list_1 ul").mouseleave(function(){
+        $(this).prev().css("color","white").css("border","none");      
+        $(this).css({background:"black",heigth:"200px",width:"150px"}).fadeOut();
+    });
   })
   </script>
 </html>

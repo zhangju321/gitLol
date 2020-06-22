@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>购物车</title>
+    <style>
+        img{
+            width: 50px;
+        }
+        ul,li{
+            list-style: none;
+        }
+    </style>
+</head>
+<body>
+   <div>
+       <input type="checkBox" id="checkAll"/>
+       <ul id="cartList">
+          <li>
+              <input type="checkbox" class="ck"/>
+              <img src="" alt="">
+              <span>标题</span>
+              <span class="price"></span>
+              <span class="minus">-</span>
+              <input type="text" class="num">
+              <span class="plus">+</span>
+              <span class="perPrices"></span>
+              <span class="del">删除</span>
+          </li>
+       </ul>
+       <div id="totalPrice">0</div>
+   </div>
+</body>
+<script src="./js/cart.js"></script>
+<script>
+    let cart = new Cart();
+    let oUl = document.getElementById("cartList");
+    cart.showList(oUl);
+    cart.checkAll("checkAll");
+    cart.updateData();
+    cart.removeData();
+</script>
+</html>
