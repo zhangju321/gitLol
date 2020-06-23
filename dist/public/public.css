@@ -70,7 +70,7 @@
 #header .header-bottom{
     background: #3D3535;
     height: 40px;
-    width: 1500px;
+    width: 1519.2px;
     /* display: flex;
     justify-content: space-between; */
     float: left;
@@ -90,7 +90,6 @@
 .list_1 ul{
     display: none;
 }
-
 #header .header-bottom .header-left ul li a{
     display: block;
     font-size: 18px;
@@ -120,8 +119,9 @@
     display: block;
     height: 27px;
     width: 290px;
-    background: black;
+    background: #3D3535;
     border: 1px solid white;
+    color: white;
 }
 #header .header-bottom .header-right img{
     display: block;
@@ -129,17 +129,6 @@
     width: 50px;
 }
 /* 中部 */
-#middle{
-    display: flex;
-    justify-content: space-around;
-}
-#middle .middle-top{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-}
 #middle .middle-top img{
     display: block;
     width: 300px;

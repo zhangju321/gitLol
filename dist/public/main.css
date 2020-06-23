@@ -18,7 +18,6 @@ html, body {
     text-align: center;
     font-size: 18px;
     background: #fff;
-
     /* Center slide text vertically */
     display: -webkit-box;
     display: -ms-flexbox;
@@ -32,6 +31,9 @@ html, body {
     -ms-flex-align: center;
     -webkit-align-items: center;
     align-items: center;
+  }
+  .swiper-wrapper img{
+    cursor: pointer;
   }
   #middle{
     height: 330px;
@@ -52,7 +54,7 @@ html, body {
   #middle .middle-top span{
     font-weight: bold;
   }
-  /* proList中部样式 */
+  /* proLi中部样式 */
   .img_PL{
     width: 1519.2px;
     height: 180px;
@@ -70,7 +72,7 @@ html, body {
     width: 100%;
   }
   #plMiddle{
-    position: absolute;
+    position: relative;
     height: 100%;
     top: 300px;
     width: 100%;
@@ -104,24 +106,29 @@ html, body {
   #plMiddle .plMiddle-right {
     overflow: hidden;
     min-height: 700px;
-    background: red;
+    /* width: 1300px; */
+    /* float: left; */
+    position: relative;
   }
  .bottom{
-   position: absolute;
-   top: 1000px;
+   width: 100%;
+   position: relative;
+ }
+ .bottom_pl{
+   position: relative;
+   top: 340px;
    margin-left: 127px;
  }
  /*购物车，列表页 数据 */
- .plMiddle-right #proLi li p{
-  width: 218px;
+ .plMiddle-right .proLi li p{
+  width: 198px;
 }       
-#proLi{
-  display: flex;
-  justify-content: space-around;
+.proLi{
+  margin-bottom: 10px;  
  }
-#proLi li .btn{
+.proLi li .btn{
   border: none;
-  width: 220px;
+  width: 200px;
   height: 40px;
   background-color: red;
   color: white;
@@ -146,12 +153,12 @@ html, body {
   font-size: 30px;
   color: green;
   margin: 0;
-  border-right: 1px solid red;
-  border-left: 1px solid red;
+  /* border-right: 1px solid red;
+  border-left: 1px solid red; */
 }
 .price{
   text-align: center;
-  border: 1px solid red;  
+  /* border: 1px solid red;   */
   margin: 0;
 }
 .jiajian{
@@ -163,7 +170,40 @@ html, body {
   display: flex;
   justify-content: space-between;
 }
-#proLi li img{
+.proLi li{
+  width: 300px;
+  float: left;
+  margin: 10px;
+  cursor: pointer;
+}
+.proLi li a {
+  width: 300px;
+  height: 200px;
+}
+.proLi li img{
  display: block;
  margin: 0;
+}
+#btnList{
+  display: flex;
+  justify-content: center;
+  position: relative;
+  z-index: 20;
+}
+#btnList li {
+margin: 0 10px;
+font-size: 16px;
+border: 1px solid goldenrod;
+cursor: pointer;
+}
+.clear_fix::after{
+	content: "";
+	clear: both;
+	display: block;
+	height: 0;
+	overflow: hidden;
+	visibility: hidden;
+}
+.clear_fix{
+	zoom:1;
 }

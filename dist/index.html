@@ -6,10 +6,9 @@
     <link rel="stylesheet" href="./public/public.css">
     <link rel="stylesheet" href="./public/reset.css">
     <link rel="stylesheet" href="./public/main.css">
-    <link rel="stylesheet" href="./login.html">
+    <script src="./js/jquery-1.11.0.js"></script>
     <link rel="stylesheet" href="./package/css/swiper.min.css">
     <script src="./package/js/swiper.min.js"></script>
-    <script src="./js/jquery-1.11.0.js"></script>
     <title>Document</title>
 </head>
 <body>
@@ -31,7 +30,7 @@
                 </li>
                 <li>
                     <img src="./img/1.png" alt="">   
-                    <a href="#">购物车</a>
+                    <a href="car.html">购物车</a>
                 </li>
                 <li>
                     <img src="./img/2.png" alt="">   
@@ -223,15 +222,18 @@
    $(function(){
     $(".list_1 a").hover(function(){
         $(this).css("color","orange").css("border-bottom","2px solid orange");
-        $(this).next().css({background:"black",heigth:"200px",width:"150px"}).fadeToggle();
+        $(this).next().css({background:"black",heigth:"200px",width:"150px"}).show();
     },function(){
         $(this).css("color","white").css("border","none");  
-        $(this).next().css("color","white").css("border","none").fadeToggle();     
+        $(this).next().show();     
     });
-    $(".list_1 ul").mouseleave(function(){
-        $(this).prev().css("color","white").css("border","none");      
-        $(this).css({background:"black",heigth:"200px",width:"150px"}).fadeOut();
+    $(".list_1").mouseleave(function(){
+        $(this).children('a').css("color","white").css("border","none");      
+        $(this).children('ul').hide();
     });
-  })
+  });
+  $('.swiper-slide').click(function(){
+      location.href = "proList.html";
+  });
   </script>
 </html>

@@ -7,9 +7,8 @@
     <link rel="stylesheet" href="./public/public.css">
     <link rel="stylesheet" href="./public/reset.css">
     <link rel="stylesheet" href="./public/main.css">
-    <link rel="stylesheet" href="./package/css/swiper.min.css">
+  
     <script src="./js/cart.js"></script>
-    <script src="./package/js/swiper.min.js"></script>
     <title>Document</title>
 </head>
 <body>
@@ -106,7 +105,7 @@
     <div class="img_PL">
         <img src="./img/pl_1.jpg" alt="">
     </div>
-    <div id="plMiddle">
+    <div id="plMiddle" class="clear_fix">
         <div class="plMiddle-left">
             <h4>类目</h4>
            <ul class="list_list">
@@ -136,15 +135,19 @@
            </ul>
         </div>
         <div class="plMiddle-right">
-            <a href="car.html">购物车</a>
-            <div>
-            <ul id="proLi">
+            <ul class="proLi clear_fix"></ul>
+            <ul id="btnList">
+                <li class="firstPage">首页</li>
+                <li class="prevPage">上一页</li>
+                <!-- 放页码按钮 -->
+                <li class="pageBtn"></li>
+                <li class="nextPage">下一页</li>
+                <li class="lastPage">尾页</li>
             </ul>
-    </div>
         </div>
     </div>
           <!--[if !IE]>底部<![endif]-->
-<div class="bottom">
+<div class="bottom_pl">
     <div class="bottomshop">
         <div id="bottomshop">
             <div class="fuwubar w980">
@@ -214,61 +217,101 @@
 </body>
 <script>
     $(function(){
-        
-        // $.post("http://jx.xuzhixiang.top/ap/api/goods/goods-add.php", {
-        //         pimg: "img/pl_9.jpg",
-        //         pname: "小小英雄 胸针套装",
-        //         pprice: 108,
-        //         pdesc: "小小英雄 胸针套装",
-        //         uid: 4000
-        //     }, data => {
-        //         console.log(data);
-        //     })
             $.get("http://jx.xuzhixiang.top/ap/api/productlist.php", {
-                uid: 16911
-            }, data => {
-                
-               var str = "";
+                uid: 16911       
+            },data => {          
                var shu = data.data;
-               for(var i in shu){
-               console.log(shu[i].pid);
-                    str+=`  <li>
-            <a href="detail.html?id=${shu[i].pid}"><img src="${shu[i].pimg}" alt=""></a>
-            <p class ="title">${shu[i].pname}</p>
-            <p class="price">${shu[i].pprice}</p>
-            <p class="jiajian"><span class="minus"> - </span>
-            <input type ="text" class= "txt" value="1">
-               <span class="plus"> + </span>
-            </p>  
-            <input type="button" class="btn" data-id = "${shu[i].pid}" value="加入购物车"/>
-         </li>`;
-               }
-               let oUl = document.getElementById("proLi");
-               oUl.innerHTML = str;
-            });
-          
-           let oMinus = document.querySelectorAll(".minus")[0];
-           let oPlus = document.querySelectorAll(".plus")[0];
-           let oTxt = document.querySelectorAll(".txt")[0];
-           let oBtn = document.querySelectorAll(".btn")[0];
-           oMinus.onclick = function(){
-               if(oTxt.value <= 1){
-                   oTxt.value = 1;
-                   return;
-               }
-               oTxt.value--;
-           }
-           oPlus.onclikc = function(){
-               oTxt.value++;
-           }
-           let cart = new Cart();
-           let btn = doucment.querySelectorAll(".btn");
-           for(var i=0;i<btn.length;i++){
-               btn[i].onclick = function(){
-                   let id = this.getAttribute("data-id");
-                   cart.saveData(id,false);
-               }
-           }
-    })
+               //总的数据量
+               let totalNums = shu.length;
+               //每页条数
+               let numPage = 8;
+               //这么多页
+               let pages = Math.ceil(totalNums / numPage);
+               //定义页面内容索引,默认为0
+               let curIndex = 0;
+               //初始显示第一页数据
+               show(curIndex);
+               //变量是定义的页面索引
+               function show(curIndex){
+                var str ="";
+                for(let i=curIndex * numPage;i<Math.min((curIndex+1) * numPage,shu.length);i++){
+                    str+=`<li>
+               <a href ="detail.html?pid=${shu[i].pid}"><img src="${shu[i].pimg}" alt=""></a>       
+               <p class ="title">${shu[i].pname}</p>
+               <p class ="price">${shu[i].pprice}</p>
+                         </li>`;
+            }
+
+            $('.proLi').html(str);
+          }
+          let str1 = "";
+        for(let i=0;i<pages;i++){
+            str1+=`<span>${i+1}</span>`;
+        } 
+         $(".pageBtn").html(str1);
+        //首页
+          $('.firstPage').click(function(){
+            curIndex = 0;
+            show(curIndex);
+          });
+          //上一页
+          $('.prevPage').click(function(){
+            curIndex--;
+            if(curIndex<0) curIndex=0;
+            show(curIndex);
+          });
+          //下一页
+          $('.nextPage').click(function(){
+            curIndex++;
+            if(curIndex>pages - 1) curIndex= pages - 1;
+            show(curIndex);
+          });
+            // 点击尾页，显示最后一页
+            $(".lastPage").click(function(){
+                curIndex = pages - 1;
+            show(curIndex);
+        });
+         // 具体页码
+        // btn.children
+        $(".pageBtn").children().click(function(){
+            curIndex = $(this).index();
+            show(curIndex);
+        });
+     });
+});
+   
+$(function(){
+    $(".list_1 a").hover(function(){
+        $(this).css("color","orange").css("border-bottom","2px solid orange");
+        $(this).next().css({background:"black",heigth:"200px",width:"150px"}).show();
+    },function(){
+        $(this).css("color","white").css("border","none");  
+        $(this).next().show();     
+    });
+    $(".list_1").mouseleave(function(){
+        $(this).children('a').css("color","white").css("border","none");      
+        $(this).children('ul').hide();
+    });
+  });
+  $('.swiper-slide').click(function(){
+      location.href = "proList.html";
+  });
+
+// //添加
+//   $.post("http://jx.xuzhixiang.top/ap/api/goods/goods-add.php", {
+//                 pimg: "img/3.png",
+//                 pname: "zzz",
+//                 pprice: 300,
+//                 pdesc: "描述信息",
+//                 uid: 4000
+//             }, data => {
+//                 console.log(data);
+//             }) 
+//   //所有商品
+//   $.get("http://jx.xuzhixiang.top/ap/api/productlist.php", {
+//                 uid: 4000
+//             }, data => {
+//                 console.log(data);
+//             })
 </script>
 </html>

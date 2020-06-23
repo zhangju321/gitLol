@@ -11,30 +11,34 @@ class Cart{
         }else{
             this.cartData[id] += num;
         }
-        localStorage.setItem("cartData",JSON.stringify(this.cartData));
-     
-    }
+      localStorage.setItem("cartData",JSON.stringify(this.cartData));    
+    } 
     //展示信息
     showList(domobj){
         this.domobj = domobj;
-        let proList = JSON.parse(localStorage.getItem("proList"))
+        let shu = JSON.parse(localStorage.getItem("shu"));
+        console.log(shu);   
         let cartData = JSON.parse(localStorage.getItem("cartData"));
-        let str = "";
-        // console.log(proList);
-        for(let id in cartData){
-            str+=` <li data-id="${id}">
+        let str = "";   
+        for(var id in shu){      
+        for(let i in cartData){ 
+            if(i == shu[id].pid) {   
+            str+=` <li data-id="${shu[id].pid}">
             <input type="checkbox" class="ck"/>
-            <img src="${proList[id].imgsrc}"/>
-            <span>${proList[id].title}</span>
-            <span class="price">${proList[id].price}</span>
+            <img src="${shu[id].pimg}"/>
+            <span>${shu[id].pname}</span>
+            <span class="price">${shu[id].pprice}</span>
             <span class="minus">-</span>
-            <input type="text" class="num" value="${cartData[id]}">
+            <input type="text" class="num" value="${cartData[i]}">
             <span class="plus">+</span>
-            <span class="perPrices">${proList[id].price * cartData[id]}</span>
+            <span class="perPrices">${shu[id].pprice * cartData[i]}</span>
             <span class="del">删除</span>
         </li>`;
+            }
         }
-        domobj.innerHTML = str;
+     }
+        this.domobj.innerHTML = str;
+        // console.log(this.domobj.innerHTML);
     }
     //全部选中
     checkAll(id){
@@ -148,7 +152,7 @@ class Cart{
   for(let i=0;i<aDelbtns.length;i++){
             aDelbtns[i].onclick = () => {
             //拿到他的父元素自定义data-id
-              let id = aDelbtns[i].parentNode.getAttribute("data=id");
+              let id = aDelbtns[i].parentNode.getAttribute("data-id");
             //删除domobj的孩子（aDelbtns[i].parentNode）
             this.domobj.removeChild(aDelbtns[i].parentNode);
             //删除掉cardata

@@ -1,25 +1,22 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src ="js/cart.js"></script>
+    <script src="./js/jquery-1.11.0.js"></script>
     <title>详情页</title>
     <style>
         ul{
             width: 400px;
-            height: 400px;
-            /* background: green; */
-            margin: 50px auto;
+            height: 800px;
         }
         ul,li{
             list-style: none;
-           
         }
         li p{
             width: 218px;
-        }
-        
+        }      
          li .btn{
             border: none;
             width: 220px;
@@ -39,10 +36,8 @@
             background: greenyellow;
             width: 24px;
         }
-        .txt{
-            
+        .txt{           
             width: 160px;
-            /* text-align: center; */
         }
         .title{
             text-align: center;
@@ -66,25 +61,21 @@
             display: flex;
             justify-content: space-between;
         }
-       li img{
-           display: block;
-           margin: 0;
-       }
+       
     </style>
 </head>
 <body>
-    <ul id="detail">
+    <ul class="detail">
       
     </ul>
 </body>
-<script src="cart.js"></script>
 <script>
     let aaa = location.search;
-    var bbb = aaa.split("?id=");
-    var oDetail = document.getElementById("detail");       
+    var bbb = aaa.split("?pid=");    
     $.get("http://jx.xuzhixiang.top/ap/api/productlist.php", {
                 uid: 16911
-            }, data => {      
+            },    
+            (data) => {            
                 var shu = data.data;
                 var str = "";           
                for(var i in shu){
@@ -93,32 +84,48 @@
             <img src="${shu[i].pimg}" alt="">
             <p class ="title">${shu[i].pname}</p>
             <p class="price">${shu[i].pprice}</p>
-            <p class="jiajian"><span class="minus"> - </span>
+            <p class="jiajian">
+                <span class="minus"> - </span>
             <input type ="text" class= "txt" value="1">
                <span class="plus"> + </span>
             </p>  
-            <input type="button" class="btn" data-id = "${shu[i].pid}" value="加入购物车"/>
+           <a href="car.html"><input type="button" class="btn" data-id = "${shu[i].pid}" value="加入购物车"/></a>
          </li>`;
         }
-               }
-               oDetail.innerHTML = str;
-            });
-  
-    let oMinus = document.querySelectorAll(".minus")[0];
-    let oPlus = document.querySelectorAll(".plus")[0];
-    let oTxt = document.querySelectorAll(".txt")[0];
-    let oBtn = document.querySelectorAll(".btn")[0];
-
-    oMinus.onclick = function(){
-        if(oTxt.value <= 1){
-            oTxt.value = 1;
-            return;
-        }
-        oTxt.value--;
-    }
-    oPlus.onclick = function(){
-        oTxt.value++;
-    }
+     }
+    $('.detail').html(str);
     
+    $(function(){
+        var result = $('.txt').val();  
+        $('.minus').click(function(){   
+            if(result <= 1){
+                result = 1;
+                return;
+            }
+            $('.txt').val(--result);
+        });
+        $('.plus').click(function(){       
+           var res = $('.txt').val(++result); 
+           var ccc = res.val();
+            // console.log(ccc);
+           return ccc;
+        });
+        console.log($('.plus'));
+       
+   let cart = new Cart();
+   var $btn = $(".btn"); 
+    
+   for(var i=0;i<$btn.length;i++){
+       $($btn[i]).click(function(){   
+        let $id = $($btn).attr("data-id");
+        cart.saveData($id,Number(res),false);
+        // localStorage.setItem("shu",JSON.stringify(shu));
+        let shu = JSON.parse(localStorage.getItem("shu"));
+        // console.log(shu);
+       });
+     
+   }
+});
+});
 </script>
 </html>
